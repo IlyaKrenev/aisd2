@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="main.js"></script> 
+</head> 
+<body style="display: flex; justify-content: center;">
+    <div id="canvas-container" style="min-height: 1000px; min-width: 1000px; display: none;">
+        <canvas id="paint" width="1000" height="1000"></canvas>
+    </div>
+    
+    <div style="margin-left: 20px">
+        <div style="display: flex; flex-direction: column">
+            <h3>Введите пары координат:</h3>
+            <textarea name="input" id="input" cols="40" rows="20" style="max-height: 500px"/></textarea>
+            <button id="submit">Найти</button>
+
+            <br>
+            <p>Введите количество точек для рандомной генерации:</p>
+            <input name="amount" type="number" id="amount" value="10">
+            <button id="generate">Сгенерировать рандомно</button>
+        </div>
+        <h3 id="outputText" style="display: none;">Результат:</h3>
+        <p id="output"></p>
+    </div>
+</body> 
+</html>
