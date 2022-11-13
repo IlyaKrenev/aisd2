@@ -39,7 +39,7 @@ function brute (coordMas) {
     for (let j = i+1; j < len; j++) {
       currDist = dist(coordMas[i], coordMas[j]);
 
-      if (currDist < mDist || !mDist) {
+      if (!mDist || currDist < mDist) {
         mDist = currDist;
         closPair = [coordMas[i], coordMas[j]];
       }
@@ -116,6 +116,9 @@ function circle (coordMas, result) {
 }
 
 function init () {
+  // function to check time of execution
+  // checkTime();
+
   const coordMas = parseInput(document.getElementById("input").value),
         outputEl = document.getElementById("output");
 
@@ -126,15 +129,19 @@ function init () {
     return a[0] - b[0];
   });
 
+  let result;
+
   clear();
 
   container.style.display = 'block';
   outputText.style.display = 'block';
 
   try {
-    const start = new Date().getTime();;
+    const start = new Date().getTime();
+
     result = findClosestDistance(sortedMas);
-    const finish = new Date().getTime();;
+
+    const finish = new Date().getTime();
 
     console.log('Время выполнения:', finish - start, 'ms');
   } catch (err) {
@@ -142,9 +149,7 @@ function init () {
     return;
   }
 
-
   outputEl.innerHTML = getOutput(result[0][0][0], result[0][0][1], result[0][1][0], result[0][1][1], result[1]);
-  
 
   circle(sortedMas, result);
 }
@@ -181,6 +186,30 @@ function changeText () {
   }
 
   document.getElementById("input").value = mas
+}
+
+function checkTime () {
+  const result = []
+
+  for (let i = 1000; i < 30000; i += 1000) {
+    const mas = []
+
+    for (let j = 0; j < i; j++) {
+      mas[j] = generateRandomly();
+    }
+
+    const sortedMas = mas.sort(function(a, b) {
+      return a[0] - b[0];
+    });
+
+    const start = new Date().getTime();
+    findClosestDistance(sortedMas);
+    const finish = new Date().getTime();
+
+    result.push({time: finish - start, amount: i})
+  }
+
+  console.log(result)
 }
 
 function generateRandomly () {
